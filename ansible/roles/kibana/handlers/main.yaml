@@ -1,0 +1,12 @@
+---
+- name: enable kibana
+  systemd:
+    enabled: yes
+    name: kibana
+  become: yes
+
+- name: start kibana
+  systemd:
+    state: started
+    name: kibana
+  become: yes

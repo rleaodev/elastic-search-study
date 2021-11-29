@@ -1,0 +1,2 @@
+[elasticsearch]
+192.168.56.30 ansible_user=vagrant ansible_ssh_private_key_file="PATH_TO.vagrant/machines/elasticsearch/virtualbox/private_key"

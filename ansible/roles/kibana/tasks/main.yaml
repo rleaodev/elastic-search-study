@@ -1,0 +1,19 @@
+---
+- name: 'Install Kibana'
+  apt:
+    name: kibana
+    update_cache: yes
+    cache_valid_time: 360
+    state: latest
+  become: yes
+    
+- name: 'Setting up Kibana'
+  template:
+    src: "{{ config_filename }}.j2"
+    dest: "{{ config_path }}/{{ config_filename }}"
+    backup: yes
+  become: yes
+  notify:
+    - daemon reload
+    - enable kibana
+    - start kibana

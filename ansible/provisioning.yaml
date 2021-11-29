@@ -1,0 +1,6 @@
+---
+- hosts: elasticsearch
+  roles:
+    - elasticsearch
+    - logstash
+    - kibana

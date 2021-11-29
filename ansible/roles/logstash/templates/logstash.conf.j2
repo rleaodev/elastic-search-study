@@ -1,0 +1,25 @@
+input {
+  file {
+    path => "{{ logstash_file_path }}"
+    start_position => "{{ logstash_file_position }}"
+  }
+}
+
+filter {
+  grok {
+    match => {"{{ filter_plugin_grok_match_field }}" => "{{ filter_plugin_grok_match_value }}"}
+  }
+  date {
+    match => ["{{ filter_plugin_date_field }}", "{{ filter_plugin_date_format }}"]
+  }
+}
+
+output {
+  elasticsearch {
+    host => {{ logstash_elasticsearch_server }}
+  }
+
+  stdout {
+    codec => {{ output_stdout}}
+  }
+}

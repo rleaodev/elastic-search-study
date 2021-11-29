@@ -1,0 +1,12 @@
+---
+- name: enable elasticsearch
+  systemd:
+    enabled: yes
+    name: elasticsearch
+  become: yes
+
+- name: start elasticsearch
+  systemd:
+    state: started
+    name: elasticsearch
+  become: yes

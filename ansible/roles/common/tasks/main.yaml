@@ -1,0 +1,25 @@
+- name: 'Add Transport Https'
+  apt:
+    name:
+      - apt-transport-https
+  become: yes
+
+- name: 'Get GPG Key from ElasticSearch'
+  get_url:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    dest: "{{ tmp_gpg_file }}"
+    validate_certs: no
+  become: yes
+
+- name: 'Add ElasticSearch GPG Key'
+  apt_key:
+    file: "{{ tmp_gpg_file }}"
+    state: present
+  become: yes
+
+- name: 'Add Elastic Package List'
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+    filename: elastic-7x
+  become: yes

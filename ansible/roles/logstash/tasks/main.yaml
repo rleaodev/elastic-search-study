@@ -1,0 +1,23 @@
+---
+- name: 'Install dependencie: openjdk-8-jre-headless'
+  apt:
+    name: openjdk-8-jre-headless
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+
+- name: 'Install LogStash'
+  apt:
+    name: logstash
+  become: yes
+
+- name: 'Setting up LogStash'
+  template:
+    src: "{{ config_filename }}.j2"
+    dest: "{{ config_path }}/{{ config_filename }}"
+    backup: yes
+  become: yes
+  notify:
+    - daemon reload
+    - enable elasticsearch
+    - start elasticsearch
